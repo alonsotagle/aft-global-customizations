@@ -13,11 +13,3 @@ provider "aws" {
     }
   }
 }
-
-provider "aws" {
-  region  = "{{ provider_region }}"
-  alias   = "aft_admin_role"
-  assume_role {
-    role_arn = "{{ aft_admin_role_arn }}"
-  }
-}

@@ -8,7 +8,9 @@ terraform {
       source  = "hashicorp/tls"
       version = "~> 4.0"
     }
+    tfe = {
+      source  = "hashicorp/tfe"
+      version = "~> 0.6"
+    }
   }
 }
-
-data "aws_caller_identity" "current" {}

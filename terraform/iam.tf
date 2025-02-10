@@ -1,6 +1,5 @@
 locals {
-  tfe_organization = jsondecode(data.aws_secretsmanager_secret_version.aft_secrets.secret_string)["tfe_organization"]
-  tfe_project_id   = jsondecode(data.aws_secretsmanager_secret_version.aft_secrets.secret_string)["tfe_project_id"]
+  tfe_organization = data.aws_ssm_parameter.tfe_organization.value
 }
 
 data "aws_iam_policy_document" "oidc_assume_role_policy" {
@@ -23,7 +22,7 @@ data "aws_iam_policy_document" "oidc_assume_role_policy" {
     condition {
       test     = "StringLike"
       variable = "app.terraform.io:sub"
-      values   = ["organization:${local.tfe_organization}:project:${local.tfe_project_id}:workspace:*:run_phase:*"]
+      values   = ["organization:${local.tfe_organization}:project:aws-aft:workspace:${tfe_workspace.aft_workspace.id}:run_phase:*"]
     }
   }
 }
