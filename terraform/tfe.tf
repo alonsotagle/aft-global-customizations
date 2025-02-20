@@ -6,8 +6,8 @@ provider "tfe" {
 resource "tfe_workspace" "aft_workspace" {
   name              = data.aws_ssm_parameter.aft_account_ref.value
   description       = "This workspace is created automatically by AWS AFT account creation."
-  auto_apply        = false
-  working_directory = "terraform"
+  auto_apply        = true
+  # working_directory = "terraform" # Defaults to root of the repo
   tag_names         = ["managedby-aft"]
   project_id        = data.aws_ssm_parameter.tfe_project_id.value
 
