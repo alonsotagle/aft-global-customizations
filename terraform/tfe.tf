@@ -4,12 +4,13 @@ provider "tfe" {
 }
 
 resource "tfe_workspace" "aft_workspace" {
-  name              = data.aws_ssm_parameter.aft_account_ref.value
-  description       = "This workspace is created automatically by AWS AFT account creation."
-  auto_apply        = true
-  working_directory = "terraform"
-  tag_names         = ["managedby-aft"]
-  project_id        = data.aws_ssm_parameter.tfe_project_id.value
+  name                  = data.aws_ssm_parameter.aft_account_ref.value
+  description           = "This workspace is created automatically by AWS AFT account creation."
+  auto_apply            = true
+  file_triggers_enabled = false
+  working_directory     = "terraform"
+  tag_names             = ["managedby-aft"]
+  project_id            = data.aws_ssm_parameter.tfe_project_id.value
 
   vcs_repo {
     branch                     = "main"
