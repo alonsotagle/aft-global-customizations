@@ -20,8 +20,9 @@ resource "tfe_workspace" "aft_workspace" {
 }
 
 resource "tfe_workspace_settings" "aft_workspace_settings" {
-  workspace_id   = tfe_workspace.aft_workspace.id
-  execution_mode = "remote"
+  workspace_id        = tfe_workspace.aft_workspace.id
+  execution_mode      = "remote"
+  global_remote_state = true
 }
 
 resource "tfe_variable" "tfc_aws_provider_auth" {
